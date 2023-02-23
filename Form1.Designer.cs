@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnColor = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnFill = new System.Windows.Forms.Button();
@@ -41,8 +43,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnColor = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
+            this.btnRedo = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -51,6 +53,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.Controls.Add(this.btnRedo);
+            this.panel2.Controls.Add(this.btnUndo);
             this.panel2.Controls.Add(this.btnSave);
             this.panel2.Controls.Add(this.btnColor);
             this.panel2.Controls.Add(this.btnClear);
@@ -61,11 +65,31 @@
             this.panel2.Size = new System.Drawing.Size(825, 100);
             this.panel2.TabIndex = 0;
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(726, 14);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(87, 34);
+            this.btnSave.TabIndex = 8;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnColor
+            // 
+            this.btnColor.BackColor = System.Drawing.Color.Black;
+            this.btnColor.Location = new System.Drawing.Point(653, 14);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(34, 34);
+            this.btnColor.TabIndex = 7;
+            this.btnColor.UseVisualStyleBackColor = false;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(703, 54);
+            this.btnClear.Location = new System.Drawing.Point(726, 54);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(110, 34);
+            this.btnClear.Size = new System.Drawing.Size(87, 34);
             this.btnClear.TabIndex = 6;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -192,25 +216,27 @@
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // btnColor
+            // btnUndo
             // 
-            this.btnColor.BackColor = System.Drawing.Color.Black;
-            this.btnColor.Location = new System.Drawing.Point(642, 13);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(34, 34);
-            this.btnColor.TabIndex = 7;
-            this.btnColor.UseVisualStyleBackColor = false;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            this.btnUndo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnUndo.Location = new System.Drawing.Point(642, 60);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(34, 34);
+            this.btnUndo.TabIndex = 9;
+            this.btnUndo.Text = "<-";
+            this.btnUndo.UseVisualStyleBackColor = false;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
             // 
-            // btnSave
+            // btnRedo
             // 
-            this.btnSave.Location = new System.Drawing.Point(703, 14);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(110, 34);
-            this.btnSave.TabIndex = 8;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnRedo.BackColor = System.Drawing.SystemColors.Control;
+            this.btnRedo.Location = new System.Drawing.Point(682, 60);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(34, 34);
+            this.btnRedo.TabIndex = 10;
+            this.btnRedo.Text = "->";
+            this.btnRedo.UseVisualStyleBackColor = false;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
             // 
             // Form1
             // 
@@ -244,6 +270,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnColor;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.Button btnUndo;
     }
 }
 

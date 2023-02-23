@@ -23,15 +23,15 @@ namespace TH_OOP
         private PaintStatus status;
         private Bitmap bm;
 
+        private readonly Stack<Bitmap> UndoStack = new Stack<Bitmap>();
+        private readonly Stack<Bitmap> RedoStack = new Stack<Bitmap>();
+
         public Form1()
         {
             InitializeComponent();
             bm = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             g = Graphics.FromImage(bm);
             g.Clear(Color.White);
-            SolidBrush solidBrush = new SolidBrush(
-                Color.FromArgb(255, 255, 0, 0));
-            g.FillEllipse(solidBrush, 0, 0, 100, 60);
             pictureBox1.Image = bm;
             status = PaintStatus.Pen;
         }
@@ -56,6 +56,9 @@ namespace TH_OOP
         {
             paint = true;
             old = e.Location;
+
+            UndoStack.Push((Bitmap)bm.Clone());
+            RedoStack.Clear();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -216,6 +219,39 @@ namespace TH_OOP
             {
                 Bitmap btm = bm.Clone(new Rectangle(0, 0, bm.Width, bm.Height), bm.PixelFormat);
                 btm.Save(sfd.FileName, ImageFormat.Jpeg);
+            }
+        }
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            if (UndoStack.Count > 0)
+            {
+                RedoStack.Push((Bitmap)bm.Clone());
+                bm = UndoStack.Pop();
+                g = Graphics.FromImage(bm);
+                pictureBox1.Image = bm;
+                pictureBox1.Invalidate();                
+            }
+            else
+            {
+                MessageBox.Show("Nothing to Undo");
+            }
+        }
+
+        private void btnRedo_Click(object sender, EventArgs e)
+        {
+            if (RedoStack.Count > 0)
+            {
+                UndoStack.Push((Bitmap)bm.Clone());
+                bm = RedoStack.Pop();
+                g = Graphics.FromImage(bm);
+                pictureBox1.Image = bm;
+                pictureBox1.Invalidate();
+
+            }
+            else
+            {
+                MessageBox.Show("Nothing to Redo");
             }
         }
     }

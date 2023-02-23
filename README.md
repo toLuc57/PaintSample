@@ -7,7 +7,7 @@ I hope it will help you.
 
 ## Screenshoot
 
-![Hi !](screenshots/Untitled.png "Drawing something")
+![Hi !](Untitled.png "Drawing something")
 
 ## What can you do with SimplePaintApp ? 
 

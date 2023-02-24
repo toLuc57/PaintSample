@@ -17,6 +17,7 @@ I hope it will help you.
 - Export your drawing on your computer to save it
 - Save a modified image
 - Undo and redo
+- Replay (undo to original and redo to current position)
 
 ### Prerequisites
 

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TH_OOP.Models;
@@ -163,10 +164,7 @@ namespace TH_OOP
             if(cx == oldColor)
             {
                 Point p = new Point(x, y);
-                if (!sp.Contains(p))
-                {
-                    sp.Push(p);
-                }                
+                sp.Push(p);
                 bm.SetPixel(x, y, newColor);
             }
         }
@@ -253,6 +251,34 @@ namespace TH_OOP
             {
                 MessageBox.Show("Nothing to Redo");
             }
+        }
+
+        private void btnReplay_Click(object sender, EventArgs e)
+        {
+            label1.Visible = true;
+            label1.Text = "0";
+            int count = UndoStack.Count;
+            while (UndoStack.Count > 0)
+            {
+                RedoStack.Push((Bitmap)bm.Clone());
+                bm = UndoStack.Pop();
+            }            
+            g = Graphics.FromImage(bm);
+            pictureBox1.Image = bm;
+            pictureBox1.Invalidate();
+
+            for (int i = 0; i < count; ++i)
+            {
+                Application.DoEvents();
+                Thread.Sleep(1000);
+                UndoStack.Push((Bitmap)bm.Clone());
+                bm = RedoStack.Pop(); ;
+                g = Graphics.FromImage(bm);
+                pictureBox1.Image = bm;
+                pictureBox1.Invalidate();
+                label1.Text = i.ToString();                
+            }
+            label1.Text = "Done";
         }
     }
 }
